@@ -1,0 +1,6 @@
+# cash
+__pycache__/
+
+venv/
+
+wtf.py
