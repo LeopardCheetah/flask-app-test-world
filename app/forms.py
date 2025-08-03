@@ -30,3 +30,7 @@ class RegistrationForm(FlaskForm):
 class EditAboutMeForm(FlaskForm):
     about_me = TextAreaField('About me', validators=[Length(min=0, max=120)])
     submit = SubmitField('Submit')
+
+class PostForm(FlaskForm):
+    post = TextAreaField('Say something:', validators=[Length(min=1, max=250)])
+    submit = SubmitField('Submit')

@@ -3,25 +3,45 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa 
 
-from app.models import User 
+from app.models import User, Post
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditAboutMeForm
+from app.forms import LoginForm, RegistrationForm, EditAboutMeForm, PostForm
 
 from urllib.parse import urlsplit
 
 import random
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
+    
+    """
     posts = [
         {
             'author': db.first_or_404(sa.select(User).where(User.username == 'admin')),
             'body': 'Beautiful day at Nettlecombe today!'
         }
     ]
+    """
+    query = sa.select(Post).order_by(Post.timestamp.desc())
+    posts = db.session.scalars(query).all()
     return render_template('index.html', title='Home', posts=posts)
 
+
+@app.route('/post', methods=['GET', 'POST'])
+@login_required
+def post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.post.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post is now live!')
+        return redirect(url_for('index'))
+    
+    posts = [] # here for completeness
+
+    return render_template('index.html', title='Post', form=form, posts=posts)
 
 # updated login form
 @app.route('/login', methods=['GET', 'POST'])
