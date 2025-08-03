@@ -46,7 +46,7 @@ class User(UserMixin, db.Model):
     def avatar(self, size):
         _salt = 'pair2025'
         digest = md5((self.username.lower() + _salt).encode('utf-8')).hexdigest()
-        return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
+        return f'https://www.gravatar.com/avatar/{digest}?d=retro&s={size}'
     
     def set_description(self, description):
         # assume description <= 120 chars

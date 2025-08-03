@@ -14,12 +14,8 @@ from urllib.parse import urlsplit
 def index():
     posts = [
         {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
+            'author': db.first_or_404(sa.select(User).where(User.username == 'admin')),
+            'body': 'Beautiful day at Nettlecombe today!'
         }
     ]
     return render_template('index.html', title='Home', posts=posts)
@@ -74,12 +70,6 @@ def signup():
     
     return render_template('signup.html', title='Sign Up!', form=form)
 
-# do something something here about being able to change their own little description/picture
-# @app.route('/people/<username>')
-
-# build a page to maybe list all the people
-# @app.route('/people')
-
 
 @app.route('/edit_about_me', methods=['GET', 'POST'])
 @login_required
@@ -97,6 +87,22 @@ def edit_about_me():
     return render_template('edit_about_me.html', title='Edit About Me',form=form)
 
 
+# do something something here about being able to change their own little description/picture
+# @app.route('/people/<username>')
+
+# build a page to maybe list all the people
+# @app.route('/people')
+
+@app.route('/people/<username>')
+@login_required
+def user(username):
+    user = db.first_or_404(sa.select(User).where(User.username == username))
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('user.html', user=user, posts=posts)
+
 
 
 
@@ -111,5 +117,5 @@ def edit_about_me():
 @app.route('/secret')
 @login_required
 def secret():
-    return render_template('index.html', title='SECRET!', posts=[])
+    return render_template('secret.html', title='SECRET!')
 
