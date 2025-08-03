@@ -1,13 +1,18 @@
 from typing import Optional
 from datetime import datetime, timezone
 
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # database shenanigans
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 from app import db
 
-class User(db.Model):
+from flask_login import UserMixin
+from app import login
+
+class User(UserMixin, db.Model):
+    ########## CONSTS/USER Vars ######################
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     # seems like something x2 here happened here
     username: so.Mapped[str] = so.mapped_column(sa.String(16), index=True, unique=True)
@@ -17,9 +22,22 @@ class User(db.Model):
     # not formally added in but this relationship does exist
     posts: so.WriteOnlyMapped['Post'] = so.relationship(back_populates='author')
 
+    #----------------------------------
+    #----------Methods-------------
+
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
     def __repr__(self):
         return '<User {}>'.format(self.username)
     
+    # end 
+    
+
 
 
 class Post(db.Model):
@@ -33,3 +51,9 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
+    
+
+
+@login.user_loader
+def load_user(id):
+    return db.session.get(User, int(id))
