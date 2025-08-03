@@ -11,6 +11,11 @@ from app import db
 from flask_login import UserMixin
 from app import login
 
+from hashlib import md5
+
+
+
+
 class User(UserMixin, db.Model):
     ########## CONSTS/USER Vars ######################
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
@@ -18,6 +23,9 @@ class User(UserMixin, db.Model):
     username: so.Mapped[str] = so.mapped_column(sa.String(16), index=True, unique=True)
 
     password_hash: so.Mapped[str] = so.mapped_column(sa.String(256))
+
+    # 120 char description
+    about_me: so.Mapped[Optional[str]] = so.mapped_column(sa.String(120))
 
     # not formally added in but this relationship does exist
     posts: so.WriteOnlyMapped['Post'] = so.relationship(back_populates='author')
@@ -35,6 +43,16 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.username)
     
+    def avatar(self, size):
+        _salt = 'pair2025'
+        digest = md5((self.username.lower() + _salt).encode('utf-8')).hexdigest()
+        return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
+    
+    def set_description(self, description):
+        # assume description <= 120 chars
+        _d = description[:120]
+        self.about_me = _d
+
     # end 
     
 

@@ -5,7 +5,7 @@ import sqlalchemy as sa
 
 from app.models import User 
 from app import app, db
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, EditAboutMeForm
 
 from urllib.parse import urlsplit
 
@@ -74,8 +74,42 @@ def signup():
     
     return render_template('signup.html', title='Sign Up!', form=form)
 
+# do something something here about being able to change their own little description/picture
+# @app.route('/people/<username>')
+
+# build a page to maybe list all the people
+# @app.route('/people')
+
+
+@app.route('/edit_about_me', methods=['GET', 'POST'])
+@login_required
+def edit_about_me():
+    form = EditAboutMeForm()
+    if form.validate_on_submit():
+        current_user.about_me = form.about_me.data
+        db.session.commit()
+        flash('Your about me changes have been saved.')
+        # go back to index
+        return redirect(url_for('index'))
+        
+    elif request.method == 'GET':
+        form.about_me.data = current_user.about_me
+    return render_template('edit_about_me.html', title='Edit About Me',form=form)
+
+
+
+
+
+
+
+
+
+
+
+
 
 @app.route('/secret')
 @login_required
 def secret():
     return render_template('index.html', title='SECRET!', posts=[])
+
