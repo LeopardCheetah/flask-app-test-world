@@ -31,8 +31,8 @@ I also didn't expect to get this far which is why the repository is named so bad
 This website (if you can even see it) is based off of [this flask tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world).
 
 SQL Schema: 
+
 <img alt="the SQL Schema you can't see" src="assets/sql_schema.png" width="640" height="341">
-![some stupid sql schema](assets/sql_schema.png)
 
 
 In the future, I would want to implement some sorta json transfer thing where all posts are saved online as some json and navigating to the site fetches said json and displays it, so the site is kinda sorta a "static site" (well enough so that I can host it on github pages). For now though, I also have no idea how to link this with a json file so currently this website can only be run locally as that's where all the db's and everything are :(.      
