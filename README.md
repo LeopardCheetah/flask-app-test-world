@@ -10,8 +10,6 @@ not vibecoded.
 This website was made in a day at [PAIR](https://pair.camp).           
 Also, see [ourtable.xyz](https://ourtable.xyz/) for another silly little website :)
 
-I also didn't expect to get this far which is why the repository is named so badly.
-
 ---
 ---
 
