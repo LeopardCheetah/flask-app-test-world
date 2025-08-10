@@ -15,6 +15,24 @@ I also didn't expect to get this far which is why the repository is named so bad
 ---
 ---
 
+### Screenshots
+Because why not.
+
+Site index:
+
+<img alt="Site index when not logged in" src="assets/site_index.png" width="640" height="336">
+
+Site index when logged in:
+
+<img alt="Site index -- logged in as user Admin" src="assets/site_index_logged_in.png" width="640" height="336">
+
+Sample user profile:
+
+<img alt="Sample profile of user 'Ruben'" src="assets/sql_sample_profile.png" width="640" height="336">
+
+
+---
+
 ### Setup
 (Why am I making a setup when no one's actually going to use it?)
 
@@ -22,6 +40,7 @@ I also didn't expect to get this far which is why the repository is named so bad
 (Optional) 1.5. Boot or make everything in a venv and install necessary packages       
 2. Run with `flask run`
 3. Navigate to http://127.0.0.1:5000/ and profit.
+
 
 
 ---
