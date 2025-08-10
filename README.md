@@ -31,6 +31,7 @@ I also didn't expect to get this far which is why the repository is named so bad
 This website (if you can even see it) is based off of [this flask tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world).
 
 SQL Schema: 
+<img alt="the SQL Schema you can't see" src="assets/sql_schema.png" width="640" height="341">
 ![some stupid sql schema](assets/sql_schema.png)
 
 

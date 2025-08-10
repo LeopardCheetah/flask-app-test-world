@@ -10,3 +10,5 @@ venv/
 # there is no sensitive info in here
 # and it would be useful for other people
 # .flaskenv
+
+accounts.txt
