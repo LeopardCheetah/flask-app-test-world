@@ -1,4 +1,9 @@
-# flask-app-test-world
+# Flask Message Board
+
+A "simple" website implemented in Python with Flask that serves as a communal message board.
+
+---
+---
 
 not vibecoded.    
 
@@ -8,8 +13,9 @@ Also, see [ourtable.xyz](https://ourtable.xyz/) for another silly little website
 I also didn't expect to get this far which is why the repository is named so badly.
 
 ---
+---
 
-## Setup
+### Setup
 (Why am I making a setup when no one's actually going to use it?)
 
 1. Download the repo into some source folder (`..../flask-app-test-world`)      
@@ -20,7 +26,7 @@ I also didn't expect to get this far which is why the repository is named so bad
 
 ---
 
-## Notes
+### Notes
 
 This website (if you can even see it) is based off of [this flask tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world).
 
