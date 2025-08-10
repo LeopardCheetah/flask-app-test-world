@@ -142,11 +142,13 @@ def edit_about_me():
 @app.route('/user/<username>')
 @login_required
 def user(username):
+    # user = db.session.execute(db.select(User).filter_by(username=username)).scalar_one()
+
+
     user = db.first_or_404(sa.select(User).where(User.username == username))
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
+    query = sa.select(Post).order_by(Post.timestamp.desc()).where(Post.author == user)
+    posts = db.session.scalars(query).all()
+
     return render_template('user.html', user=user, posts=posts)
 
 
@@ -158,10 +160,7 @@ def user(username):
 
 
 
-
-
-@app.route('/secret')
-@login_required
-def secret():
-    return render_template('secret.html', title='SECRET!')
+@app.route('/test')
+def test():
+    return render_template('test.html', title='for testing purposes')
 

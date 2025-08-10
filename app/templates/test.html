@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <script>
+        function getJson() {
+            console.log("button was pressed")
+            document.getElementById("display-area").innerHTML = "Some text just magically appeared!!";
+            console.log("end button command")
+        }
+    </script>
+
+
+
+    <h2>Get Json</h2>
+    <button type="button" id="json-getter" onclick="getJson()">Click Me!</button>
+
+    <p id="display-area"></p>
+    
+
+{% endblock %}
+
