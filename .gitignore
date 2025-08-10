@@ -5,4 +5,8 @@ venv/
 
 # env variables (kinda)
 .env
-.flaskenv
+
+# releasing this to the public since
+# there is no sensitive info in here
+# and it would be useful for other people
+# .flaskenv
